@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {customers} from './customer/customer-data';
+import {orders} from './order/order-data';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  constructor() {
+    localStorage.setItem('customers-list', JSON.stringify(customers));
+    localStorage.setItem('orders-list', JSON.stringify(orders));
+  }
 }

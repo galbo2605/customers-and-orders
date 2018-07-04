@@ -1,0 +1,73 @@
+<form *ngIf="customer" (ngSubmit)="saveCustomer()" [formGroup]="customerForm" style="height: 100%">
+  <mat-card style="height: 100%">
+    <mat-card-title>{{pageTitle}}</mat-card-title>
+    <mat-card-subtitle>Customer</mat-card-subtitle>
+
+    <mat-card-content style="display: flex; flex-direction: column">
+      <mat-form-field>
+        <input type="text"
+               placeholder="Customer Name"
+               id="customerNameId"
+               formControlName="customerName"
+               matInput
+               required
+               #customerName>
+        <mat-error>{{displayMessage.customerName}}</mat-error>
+        <mat-hint>{{customerName.value.length}} / 50</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="email"
+               placeholder="Email"
+               id="customerEmailId"
+               formControlName="customerEmail"
+               matInput
+               required>
+        <mat-error>{{displayMessage.customerEmail}}</mat-error>
+        <mat-hint>Full email address</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text"
+               placeholder="Country"
+               id="countryId"
+               formControlName="country"
+               matInput
+               required>
+        <mat-error>{{displayMessage.country}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text"
+               placeholder="City"
+               id="cityId"
+               formControlName="city"
+               matInput
+               required>
+        <mat-error>{{displayMessage.city}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text"
+               placeholder="Street"
+               id="streetId"
+               formControlName="street"
+               matInput
+               required>
+        <mat-error>{{displayMessage.street}}</mat-error>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions style="display: flex; justify-content: space-evenly">
+      <button type="submit" mat-button
+              [disabled]="!customerForm.valid || !customerForm.dirty">Save
+      </button>
+      <button type="button" mat-button (click)="cancelEdit()">Cancel</button>
+      <button type="button" mat-button (click)="deleteCustomer()">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+<div *ngIf="errorMessage" class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>

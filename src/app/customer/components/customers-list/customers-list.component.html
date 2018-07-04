@@ -1,0 +1,28 @@
+<mat-card style="height: 100%">
+  <mat-card-title>Overview</mat-card-title>
+  <mat-card-subtitle>{{pageTitle}}</mat-card-subtitle>
+
+  <mat-card-content *ngIf="dataSource">
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container *ngFor="let col of tableColumns" [matColumnDef]="col.header">
+        <mat-header-cell *matHeaderCellDef>{{col.header}}</mat-header-cell>
+        <mat-cell *matCellDef="let customer">{{customer[col.property]}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let customer; columns: displayedColumns"
+               [ngClass]="{'active': customer?.id === selectedCustomer?.id}"
+               (click)="customerSelected(customer)"></mat-row>
+    </mat-table>
+  </mat-card-content>
+
+  <mat-card-actions style="display: flex; justify-content: space-between">
+    <button mat-button (click)="newCustomer()">Add</button>
+    <mat-paginator pageSize="5"
+                   [pageSizeOptions]="[5,10,25]"
+                   showFirstLastButtons></mat-paginator>
+  </mat-card-actions>
+</mat-card>
+<mat-error *ngIf="errorMessage" class="alert alert-danger">
+  Error: {{ errorMessage }}
+</mat-error>

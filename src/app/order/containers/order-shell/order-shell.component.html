@@ -1,0 +1,8 @@
+<div class="container">
+  <app-orders-list style="flex: 2; margin-right: 0.25rem"
+                      [orders$]="orders$"
+                      [selectedOrder]="selectedOrder$ | async"
+                      [errorMessage]="errorMessage$ | async"
+                      (initializeNewOrder)="(newOrder())"
+                      (selected)="orderSelected($event)"></app-orders-list>
+</div>

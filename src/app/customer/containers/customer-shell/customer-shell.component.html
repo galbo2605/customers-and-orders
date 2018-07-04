@@ -1,0 +1,22 @@
+<div class="container">
+  <app-customers-list style="flex: 2; margin-right: 0.25rem"
+                      [customers$]="customers$"
+                      [selectedCustomer]="selectedCustomer$ | async"
+                      [errorMessage]="errorMessage$ | async"
+                      (initializeNewCustomer)="(newCustomer())"
+                      (selected)="customerSelected($event)"></app-customers-list>
+  <app-customers-edit style="flex: 1; margin-left: 0.25rem"
+                      [ngStyle]="{'display': (selectedCustomer$ | async) ? 'unset' : 'none'}"
+                      [selectedCustomer]="selectedCustomer$ | async"
+                      [errorMessage]="errorMessage$ | async"
+                      (clearCurrent)="clearCustomer()"
+                      (update)="updateCustomer($event)"
+                      (delete)="deleteCustomer($event)"
+                      (create)="saveCustomer($event)"></app-customers-edit>
+</div>
+<div class="container">
+  <app-customer-orders-list *ngIf="selectedCustomer$ | async"
+                            style="width: 100vw"
+                            [orders$]="orders$"
+                            [errorMessage]="errorMessage$ | async"></app-customer-orders-list>
+</div>

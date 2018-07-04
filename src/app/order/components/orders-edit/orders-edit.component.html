@@ -1,0 +1,73 @@
+<!--<div mat-dialog-content>-->
+  <form (ngSubmit)="saveOrder()" [formGroup]="orderForm" style="height: 100%">
+    <mat-card style="height: 100%">
+      <mat-card-title>{{pageTitle}}</mat-card-title>
+      <mat-card-subtitle>Order</mat-card-subtitle>
+
+      <mat-card-content style="display: flex; flex-direction: column">
+        <mat-form-field>
+          <input type="text"
+                 placeholder="Order Name"
+                 id="orderNameId"
+                 formControlName="orderName"
+                 matInput
+                 required
+                 #orderName>
+          <mat-error>{{displayMessage.orderName}}</mat-error>
+          <mat-hint>{{orderName.value.length}} / 50</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="number"
+                 placeholder="Order Number"
+                 id="orderNumberId"
+                 formControlName="orderNumber"
+                 matInput
+                 required>
+          <mat-error>{{displayMessage.orderNumber}}</mat-error>
+          <mat-hint>Full Order number address</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="number"
+                 placeholder="Star Rating (1-5)"
+                 id="starRatingId"
+                 formControlName="starRating"
+                 matInput>
+          <mat-error>{{displayMessage.starRating}}</mat-error>
+          <mat-hint>Optional Rating</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="number"
+                 placeholder="Customer ID"
+                 id="customerIdId"
+                 formControlName="customerId"
+                 matInput
+                 required>
+          <mat-error>{{displayMessage.customerId}}</mat-error>
+          <mat-hint>Set a customer by ID</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+        <textarea placeholder="Description"
+                  id="descriptionId"
+                  formControlName="description"
+                  matTextareaAutosize="true"
+                  [matAutosizeMinRows]="3"
+                  matInput></textarea>
+          <mat-hint>Optional Description</mat-hint>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions style="display: flex; justify-content: space-evenly">
+
+      </mat-card-actions>
+    </mat-card>
+  </form>
+<div mat-dialog-actions>
+  <button type="button" mat-button (click)="onClose()">Close</button>
+  <button type="submit" mat-button [disabled]="!isValidAndDirty" (click)="saveOrder()">Save</button>
+  <button type="button" mat-button (click)="cancelEdit()">Cancel</button>
+  <button type="button" mat-button (click)="deleteOrder()">Delete</button>
+</div>
